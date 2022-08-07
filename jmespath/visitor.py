@@ -1,4 +1,5 @@
 import operator
+from collections import Sequence
 
 from jmespath import functions
 from jmespath.compat import string_type
@@ -271,7 +272,7 @@ class TreeInterpreter(Visitor):
 
     def visit_projection(self, node, value):
         base = self.visit(node['children'][0], value)
-        if not isinstance(base, list):
+        if not isinstance(base, Sequence):
             return None
         collected = []
         for element in base:
